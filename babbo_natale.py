@@ -52,6 +52,9 @@ class BabboNatale(arcade.Window):
         # L'immagine di sfondo sara' memorizzata in questa variabile.
         self.background = None
 
+        # Attivazione e spegnimento dell'audio
+        self.mute = False
+
         self.setup()
     
     def setup(self):
@@ -121,7 +124,8 @@ class BabboNatale(arcade.Window):
         collisioni = arcade.check_for_collision_with_list(self.babbo, self.lista_cookie)
         
         if len(collisioni) > 0: # Vuol dire che il personaggio si è scontrato con qualcosa
-            arcade.play_sound(self.suono_munch)
+            if self.mute == False:
+                arcade.play_sound(self.suono_munch)
             for cookie in collisioni:
                 cookie.remove_from_sprite_lists()
             self.crea_cookie() # creo un altro biscotto
@@ -135,7 +139,12 @@ class BabboNatale(arcade.Window):
             self.left_pressed = True
         elif tasto in (arcade.key.RIGHT, arcade.key.D):
             self.right_pressed = True
-    
+        elif tasto == arcade.key.M:
+            if self.mute == True:
+                self.mute = False
+            else:
+                self.mute = True
+
     def on_key_release(self, tasto, modificatori):
         """Gestisce il rilascio dei tasti"""
         if tasto in (arcade.key.UP, arcade.key.W):
