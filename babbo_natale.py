@@ -1,7 +1,9 @@
 import arcade
 import random
 
-
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = 600
+SCREEN_TITLE = "Babbo Natale"
 
 """
 Compiti per casa: La scorpacciata di Babbo Natale
@@ -47,6 +49,9 @@ class BabboNatale(arcade.Window):
         
         self.velocita = 4
         
+        # L'immagine di sfondo sara' memorizzata in questa variabile.
+        self.background = None
+
         self.setup()
     
     def setup(self):
@@ -56,6 +61,9 @@ class BabboNatale(arcade.Window):
         self.babbo.scale = 1.0
         self.lista_babbo.append(self.babbo)
         
+        # Carica l'immagine di sfondo nel setup così da non continuare a ricaricarla.
+        self.background = arcade.load_texture("./assets/sfondo.jpg")
+
         self.crea_cookie()
     
     def crea_cookie(self):
@@ -67,6 +75,10 @@ class BabboNatale(arcade.Window):
     
     def on_draw(self):
         self.clear()
+
+        # disegna lo sfondo
+        arcade.draw_texture_rect(self.background, arcade.LBWH(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
+        
         self.lista_cookie.draw()
         self.lista_babbo.draw()
     
@@ -136,7 +148,7 @@ class BabboNatale(arcade.Window):
             self.right_pressed = False
 
 def main():
-    gioco = BabboNatale(600, 600, "Babbo Natale")
+    gioco = BabboNatale(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
     arcade.run()
 
 if __name__ == "__main__":
