@@ -87,6 +87,9 @@ class BabboNatale(arcade.Window):
         
         self.lista_cookie.draw()
         self.lista_babbo.draw()
+
+        arcade.draw_text('Biscotti raccolti: '+str(self.conta_biscotti),0.0,570.0,
+                        arcade.color.RED,20,180,'left')
     
     def on_update(self, delta_time):
         # Calcola movimento in base ai tasti premuti
