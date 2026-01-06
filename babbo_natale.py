@@ -58,6 +58,9 @@ class BabboNatale(arcade.Window):
         # Biscotti raccolti
         self.conta_biscotti = 0
 
+        # Biscotti da creare
+        self.biscotti_da_creare = 0
+        
         self.setup()
                
     def setup(self):
@@ -140,7 +143,10 @@ class BabboNatale(arcade.Window):
                 arcade.play_sound(self.suono_munch)
             for cookie in collisioni:
                 cookie.remove_from_sprite_lists()
-            self.crea_cookie() # creo un altro biscotto
+            if len(self.lista_cookie) == 0:
+                self.biscotti_da_creare = int (self.conta_biscotti / 5 + 1)
+                for x in range (self.biscotti_da_creare):
+                    self.crea_cookie() # creo un altro biscotto
             self.conta_biscotti += len(collisioni)
     
     def on_key_press(self, tasto, modificatori):
