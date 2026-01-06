@@ -55,8 +55,11 @@ class BabboNatale(arcade.Window):
         # Attivazione e spegnimento dell'audio
         self.mute = False
 
+        # Biscotti raccolti
+        self.conta_biscotti = 0
+
         self.setup()
-    
+               
     def setup(self):
         self.babbo = arcade.Sprite("./assets/babbo.png")
         self.babbo.center_x = 300
@@ -129,6 +132,7 @@ class BabboNatale(arcade.Window):
             for cookie in collisioni:
                 cookie.remove_from_sprite_lists()
             self.crea_cookie() # creo un altro biscotto
+            self.conta_biscotti += len(collisioni)
     
     def on_key_press(self, tasto, modificatori):
         if tasto in (arcade.key.UP, arcade.key.W):
